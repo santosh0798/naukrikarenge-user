@@ -1,0 +1,32 @@
+.reglog1,.logout1{
+    display: none !important;
+}
+
+.activeNav{
+    display: none !important;
+    
+}
+
+.nonactiveNav{
+    display: none !important;
+    
+}
+
+@media only screen and (max-width: 600px) {
+    #reglog,#logout{
+        display: none !important;
+    }
+    .reglog1,.logout1{
+        display: block !important;
+    }
+    .activeNav{
+        display: block !important;
+        
+    }
+    
+    .nonactiveNav{
+        display: none !important;
+        
+    }
+   
+  }
