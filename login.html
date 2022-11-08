@@ -58,8 +58,8 @@
                 <div class="logo">
                   <a href="index.html"
                     ><img
-                          width="125"
-                          height="50"
+                      width="125"
+                      height="50"
                       src="assets/img/logo/logo.svg"
                       alt="Naukri Karenge Header Logo"
                   /></a>
@@ -108,7 +108,7 @@
       class="d-flex align-items-center py-3 py-md-0"
       style="margin-top: 50px"
     >
-    <div class="reglog1" style="text-align: center"></div>
+      <div class="reglog1" style="text-align: center"></div>
 
       <div class="container">
         <div class="card login-card">
@@ -128,8 +128,8 @@
                     <p>Enter Your Email</p>
                     <input
                       type="text"
-                      name="phone"
-                      id="phone"
+                      name="email"
+                      id="email"
                       class="form-control"
                       placeholder="Enter Your Phone Number"
                     />
@@ -138,32 +138,32 @@
                   <div class="form-group">
                     <p>Password</p>
                     <input
-                            type="password"
-                            name="phone"
-                            id="password"
-                            class="form-control"
-                            placeholder="Enter Your Phone Number"
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="Enter Your Password"
                     />
                   </div>
 
-<!--                  <div class="form-group">-->
-<!--                    <p>OTP Code</p>-->
-<!--                    <input-->
-<!--                      type="text"-->
-<!--                      name="code"-->
-<!--                      id="code"-->
-<!--                      class="form-control"-->
-<!--                      placeholder="Enter Your OTP"-->
-<!--                    />-->
-<!--                  </div>-->
-<!--                  <div id="recaptcha-container"></div>-->
-<!--                  <input-->
-<!--                    name="login"-->
-<!--                    id="otp"-->
-<!--                    class="btn btn-block login-btn mb-4"-->
-<!--                    type="button"-->
-<!--                    value="Send OTP"-->
-<!--                  />-->
+                  <!--                  <div class="form-group">-->
+                  <!--                    <p>OTP Code</p>-->
+                  <!--                    <input-->
+                  <!--                      type="text"-->
+                  <!--                      name="code"-->
+                  <!--                      id="code"-->
+                  <!--                      class="form-control"-->
+                  <!--                      placeholder="Enter Your OTP"-->
+                  <!--                    />-->
+                  <!--                  </div>-->
+                  <!--                  <div id="recaptcha-container"></div>-->
+                  <!--                  <input-->
+                  <!--                    name="login"-->
+                  <!--                    id="otp"-->
+                  <!--                    class="btn btn-block login-btn mb-4"-->
+                  <!--                    type="button"-->
+                  <!--                    value="Send OTP"-->
+                  <!--                  />-->
 
                   <input
                     name="login"
@@ -202,15 +202,15 @@
                     <ul>
                       <li>
                         <a
-                                href="https://naukrikarenge.netlify.app/#/auth/signup"
+                          href="https://naukrikarenge.netlify.app/#/auth/signup"
                         >
                           Signup</a
                         >
                       </li>
                       <li>
                         <a
-                                href="https://naukrikarenge.netlify.app/#/auth/signin"
-                        >Login</a
+                          href="https://naukrikarenge.netlify.app/#/auth/signin"
+                          >Login</a
                         >
                       </li>
                       <!--                      <li><a href="#">Companies</a></li>-->
@@ -377,76 +377,63 @@ https://firebase.google.com/docs/web/setup#available-libraries -->
       firebase.analytics();
       let db = firebase.firestore();
 
-
-      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "normal",
-          callback: function (response) {
-            submitPhoneNumberAuth();
-          },
-        }
-      );
-      
-
-      document.getElementById("code").style.display = "none";
-      document.getElementById("login").style.display = "none";
-
-      document.getElementById("otp").onclick = submitPhoneNumberAuth;
       document.getElementById("login").onclick = submitPhoneNumberAuthCode;
 
-      function submitPhoneNumberAuth() {
-        var phoneNumber = "+91" + document.getElementById("phone").value;
-        var appVerifier = window.recaptchaVerifier;
-        firebase
-          .auth()
-          .signInWithPhoneNumber(phoneNumber, appVerifier)
-          .then(function (confirmationResult) {
-            window.confirmationResult = confirmationResult;
-            document.getElementById("code").style.display = "block";
-            document.getElementById("login").style.display = "block";
-            document.getElementById("otp").style.display = "none";
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+      // function submitPhoneNumberAuth() {
+      //   var phoneNumber = "+91" + document.getElementById("phone").value;
+      //   var appVerifier = window.recaptchaVerifier;
+      //   firebase
+      //     .auth()
+      //     .signInWithPhoneNumber(phoneNumber, appVerifier)
+      //     .then(function (confirmationResult) {
+      //       window.confirmationResult = confirmationResult;
+      //       document.getElementById("code").style.display = "block";
+      //       document.getElementById("login").style.display = "block";
+      //       document.getElementById("otp").style.display = "none";
+      //     })
+      //     .catch(function (error) {
+      //       console.log(error);
+      //     });
+      // }
 
-      function submitPhoneNumberAuthCode() {
-        var code = document.getElementById("code").value;
-        confirmationResult
-          .confirm(code)
-          .then(function (result) {
-            var user = result.user;
-            console.log(user);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
+      async function submitPhoneNumberAuthCode() {
+        //   var code = document.getElementById("code").value;
+        //   confirmationResult
+        //     .confirm(code)
+        //     .then(function (result) {
+        //       var user = result.user;
+        //       console.log(user);
+        //     })
+        //     .catch(function (error) {
+        //       console.log(error);
+        //     });
+        // }
+        try {
+          var phoneNumber = document.getElementById("email").value;
+          var pass = document.getElementById("password").value;
 
-      firebase.auth().onAuthStateChanged(async function (user) {
-        if (user) {
-          console.log("USER LOGGED IN");
-          const firestoreRef = db.collection("candidates");
-          var phoneNumber =document.getElementById("phone").value;
+          const firestoreRef = await db.collection("candidates");
 
           const queryRef = await firestoreRef
-            .where("mobile", "==", phoneNumber.trim())
+            .where("email", "==", phoneNumber.trim())
+            .where("password", "==", pass.trim())
             .get();
 
-          queryRef.forEach((doc) => {
-            console.log(doc.data());
-            let temp = doc.data();
-            localStorage.setItem("user", JSON.stringify(doc.data()));
-            localStorage.setItem("userId", JSON.stringify(doc.id));
-            window.location.href="/index.html";
-          });
-        } else {
-          // No user is signed in.
-          console.log("USER NOT LOGGED IN");
+          if (queryRef.size > 0) {
+            queryRef.forEach((doc) => {
+              console.log(doc.data());
+              let temp = doc.data();
+              localStorage.setItem("user", JSON.stringify(doc.data()));
+              localStorage.setItem("userId", JSON.stringify(doc.id));
+              window.location.href = "/index.html";
+            });
+          } else {
+            window.alert("Please add correct credentials");
+          }
+        } catch (err) {
+          console.log(err);
         }
-      });
+      }
     </script>
   </body>
 </html>

@@ -91,8 +91,8 @@
                 <div class="logo">
                   <a href="index.html"
                     ><img
-                          width="125"
-                          height="50"
+                      width="125"
+                      height="50"
                       src="assets/img/logo/logo.svg"
                       alt="Naukri Karenge Header Logo"
                   /></a>
@@ -187,11 +187,11 @@
                   <div class="form-group">
                     <p>Password</p>
                     <input
-                            type="password"
-                            name="password"
-                            id="password"
-                            class="form-control"
-                            placeholder="Enter Your Email Address"
+                      type="password"
+                      name="password"
+                      id="password"
+                      class="form-control"
+                      placeholder="Enter Your Email Address"
                     />
                   </div>
 
@@ -269,15 +269,15 @@
                     <ul>
                       <li>
                         <a
-                                href="https://naukrikarenge.netlify.app/#/auth/signup"
+                          href="https://naukrikarenge.netlify.app/#/auth/signup"
                         >
                           Signup</a
                         >
                       </li>
                       <li>
                         <a
-                                href="https://naukrikarenge.netlify.app/#/auth/signin"
-                        >Login</a
+                          href="https://naukrikarenge.netlify.app/#/auth/signin"
+                          >Login</a
                         >
                       </li>
                       <!--                      <li><a href="#">Companies</a></li>-->
@@ -444,16 +444,7 @@
       firebase.analytics();
       let db = firebase.firestore();
 
-
-      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-        "recaptcha-container",
-        {
-          size: "normal",
-          callback: function (response) {
-            submitPhoneNumberAuth();
-          },
-        }
-      );
+      
 
       document.getElementById("login").onclick = async () => {
         const exist = await db
@@ -484,24 +475,12 @@
               'input[name="fav_language"]:checked'
             ).value,
             referalcode: document.getElementById("referal").value,
+            password: document.getElementById("password").value,
             createdAt: new Date(),
             appliedPost: [],
           })
           .then(() => {
-            // window.alert("user registered successfully");
-
-            var phoneNumber = "+91" + document.getElementById("mobile").value;
-            var appVerifier = window.recaptchaVerifier;
-            firebase
-              .auth()
-              .signInWithPhoneNumber(phoneNumber, appVerifier)
-              .then(function (confirmationResult) {
-                window.confirmationResult = confirmationResult;
-                window.location.href = "/profile.html";
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
+            window.location.href = "/login.html"; 
           })
           .catch((error) => {
             window.alert("user registration failed");
